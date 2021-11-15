@@ -65,7 +65,7 @@ const ConnectToPhantom = () => {
     phantom?.disconnect();
   };
 
-  let phantomButton = "";
+  let phantomButton;
 
   if (phantom) {
     if (connected) {
