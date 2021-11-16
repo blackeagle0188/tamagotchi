@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfig,} from "@nfteyez/sol-rayz";
 import styles from "./ConnectToPhantom.module.css"
+import Controller from "./Controller"
 
 type Event = "connect" | "disconnect";
 
@@ -107,7 +108,7 @@ const ConnectToPhantom = () => {
           <img src="man_1.png" className={styles.character}/>
         )}
       </div>
-      
+      <Controller/>
       { phantomButton }
     </div>
   );
