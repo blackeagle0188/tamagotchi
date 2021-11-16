@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfig,} from "@nfteyez/sol-rayz";
+import styles from "./ConnectToPhantom.module.css"
 
 type Event = "connect" | "disconnect";
 
@@ -91,6 +92,7 @@ const ConnectToPhantom = () => {
     <a
         href="https://phantom.app/"
         target="_blank"
+        rel="noreferrer"
         className="bg-purple-500 px-4 py-2 border border-transparent rounded-md text-base font-medium text-white"
     >
       Get Phantom
@@ -99,7 +101,13 @@ const ConnectToPhantom = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <img src="shell.png" className="mb-12"/>
+      <div className="relative">
+        <img src="shell.png" className="mb-12"/>
+        {phantom && connected && (
+          <img src="man_1.png" className={styles.character}/>
+        )}
+      </div>
+      
       { phantomButton }
     </div>
   );
