@@ -126,7 +126,9 @@ const ConnectToPhantom = () => {
       <div className="relative">
         <img src="/shell.png" className="mb-12" />
         {phantom && connected && characterImage != "" && (
-          <img src={characterImage} className={styles.character} />
+          <div className={styles.character}>
+            <Image src={characterImage}  width="200" height="200" />
+          </div>
         )}
       </div>
       <Controller/>
