@@ -29,6 +29,10 @@ export default function Modal(props) {
     setOpen(false)
     props.setOpenModal(false)
   }
+  const handleSelectedNFT = (name) => {
+      props.handleCharacterImage(name)
+      setOpen(false)
+  }
 
   const cancelButtonRef = useRef(null)
 
@@ -72,7 +76,7 @@ export default function Modal(props) {
                   <div className="flex flex-wrap justify-around">
                     {
                       nfts.map((nft, i) => (
-                          <NFT key={i} uri={nft["data"]["uri"]}/>
+                          <NFT key={i} uri={nft["data"]["uri"]} handleSelectedNFT={handleSelectedNFT}/>
                       ))
                     }
                   </div>

@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { CORS_ENDPOINT } from "../../constant"
 import styles from "./nft.module.css"
 
-const NFT = (uri) => {
+const NFT = (props) => {
     const [metadata, setMetaData] = useState()
     const [loaded, setLoaded] = useState(false)
     const [nftElement, setNftElement] = useState("")
     
     useEffect(async () => {
         await getMetaData()
-    }, [uri])
+    }, [props.uri])
 
     const getMetaData = async () => {
-        fetch(CORS_ENDPOINT+uri["uri"],{
+        fetch(CORS_ENDPOINT+props.uri,{
             "method": "GET",
             "headers": {
               "content-type": "application/json",
@@ -32,12 +32,18 @@ const NFT = (uri) => {
         setLoaded(true)
     }
 
+    const handleNftSelect = () => {
+        let nftName = metadata["name"];
+        nftName = nftName.replace(/\s/g, '').replace("Myopa", "").replace("#", "").replace(/[0-9]/g, '').toLowerCase()
+        props.handleSelectedNFT(nftName)
+    }
+
     useEffect(() => {
         if(metadata == undefined) {
             return;
         }
         setNftElement(
-            <div className={styles.nft_image}>
+            <div className={styles.nft_image} onClick={handleNftSelect}>
                 {!loaded && (
                     <div className={styles.loading}></div>
                 ) }

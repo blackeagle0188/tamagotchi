@@ -4,6 +4,7 @@ import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfi
 import styles from "./ConnectToPhantom.module.css"
 import Controller from "./Controller"
 import Modal from "./Modal"
+import { GENDER } from "../constant"
 
 type Event = "connect" | "disconnect";
 
@@ -18,6 +19,9 @@ const ConnectToPhantom = () => {
   const [address, setAddress] = useState("")
   const [myopaNFT, setMyopaNft] = useState([])
   const [openModal, setOpenModal] = useState(false)
+  const [characterImage, setCharacterImage] = useState("")
+
+  console.log(GENDER)
 
   const getProvider = async () => {
     if ("solana" in window) {
@@ -32,7 +36,6 @@ const ConnectToPhantom = () => {
           connection: connect,
           serialization: true,
         });
-        // console.log(nfts)
         setMyopaNft(nfts);
         return nfts;
       }
@@ -77,6 +80,13 @@ const ConnectToPhantom = () => {
     setOpenModal(true)
   }
 
+  const handleCharacterImage = (name) => {
+    console.log(name)
+    let imgsrc = `character/${GENDER[name]}_${name}/${GENDER[name]}_${name}_idle1.png`;
+    console.log(imgsrc)
+    setCharacterImage(imgsrc)
+  }
+
   let phantomButton;
 
   if (phantom) {
@@ -115,11 +125,11 @@ const ConnectToPhantom = () => {
       <div className="relative">
         <img src="shell.png" className="mb-12"/>
         {phantom && connected && (
-          <img src="man_1.png" className={styles.character}/>
+          <img src={characterImage} className={styles.character}/>
         )}
       </div>
       <Controller/>
-      <Modal myopaNFT={myopaNFT} status={openModal} setOpenModal={setOpenModal} />
+      <Modal myopaNFT={myopaNFT} status={openModal} setOpenModal={setOpenModal} handleCharacterImage={handleCharacterImage} />
       { phantomButton }
       {phantom && connected && (
         <button
