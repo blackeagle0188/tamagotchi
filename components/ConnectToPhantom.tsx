@@ -5,6 +5,7 @@ import styles from "./ConnectToPhantom.module.css"
 import Controller from "./Controller"
 import Modal from "./Modal"
 import { GENDER } from "../constant"
+import Image from 'next/image'
 
 type Event = "connect" | "disconnect";
 
