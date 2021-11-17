@@ -121,12 +121,14 @@ const ConnectToPhantom = () => {
       <Controller/>
       <Modal myopaNFT={myopaNFT} status={openModal} setOpenModal={setOpenModal} />
       { phantomButton }
-      <button
+      {phantom && connected && (
+        <button
           onClick={handleChangeCharacter}
           className="bg-purple-500 py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-opacity-75 mt-8"
         >
           Change character
         </button>
+      )}
     </div>
   );
 };

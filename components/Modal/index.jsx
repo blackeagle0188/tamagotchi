@@ -12,18 +12,15 @@ export default function Modal(props) {
     if(original.length == 0) {
         return;
     }
-    console.log(props)
     original = original.filter(item => item["data"]["symbol"] == "MYO")
     setNFTs(original)
     if(original && original.length != 0) {
-        console.log(original)
         setOpen(true)
     }
   }, [props.myopaNFT])
 
   useEffect(() => {
     if(props.status) {
-        console.log(props.status)
         setOpen(props.status)
     }
   }, [props.status])
