@@ -82,8 +82,8 @@ const ConnectToPhantom = () => {
   }
 
   const handleCharacterImage = (name) => {
-    console.log(name)
-    let imgsrc = `/character/${GENDER[name]}_${name}/${GENDER[name]}_${name}_idle1.png`;
+    let upperGender = GENDER[name].toUpperCase()
+    let imgsrc = `/character/${GENDER[name]}_${name}/${upperGender}_${name}_idle1.png`;
     console.log(imgsrc)
     setCharacterImage(imgsrc)
   }
@@ -126,9 +126,7 @@ const ConnectToPhantom = () => {
       <div className="relative">
         <img src="/shell.png" className="mb-12" />
         {phantom && connected && characterImage != "" && (
-          <div className={styles.character}>
-            <Image src={characterImage}  width="200" height="200" />
-          </div>
+          <img src={characterImage} className={styles.character} />
         )}
       </div>
       <Controller/>
