@@ -82,7 +82,7 @@ const ConnectToPhantom = () => {
 
   const handleCharacterImage = (name) => {
     console.log(name)
-    let imgsrc = `character/${GENDER[name]}_${name}/${GENDER[name]}_${name}_idle1.png`;
+    let imgsrc = `/character/${GENDER[name]}_${name}/${GENDER[name]}_${name}_idle1.png`;
     console.log(imgsrc)
     setCharacterImage(imgsrc)
   }
@@ -123,9 +123,9 @@ const ConnectToPhantom = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="relative">
-        <img src="shell.png" className="mb-12"/>
-        {phantom && connected && (
-          <img src={characterImage} className={styles.character}/>
+        <img src="/shell.png" className="mb-12" />
+        {phantom && connected && characterImage != "" && (
+          <img src={characterImage} className={styles.character} />
         )}
       </div>
       <Controller/>
