@@ -1,0 +1,1 @@
+export const CORS_ENDPOINT = "https://tangelo-backend-01ba.onrender.com/";

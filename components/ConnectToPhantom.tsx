@@ -3,6 +3,7 @@ import { Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfig,} from "@nfteyez/sol-rayz";
 import styles from "./ConnectToPhantom.module.css"
 import Controller from "./Controller"
+import Modal from "./Modal"
 
 type Event = "connect" | "disconnect";
 
@@ -14,6 +15,9 @@ interface Phantom {
 
 const ConnectToPhantom = () => {
   const [phantom, setPhantom] = useState<Phantom | null>(null);
+  const [address, setAddress] = useState("")
+  const [myopaNFT, setMyopaNft] = useState([])
+  const [openModal, setOpenModal] = useState(false)
 
   const getProvider = async () => {
     if ("solana" in window) {
@@ -21,13 +25,15 @@ const ConnectToPhantom = () => {
       if (provider.isPhantom) {
         const connect = createConnectionConfig(clusterApiUrl("devnet"));
         let ownerToken = provider.publicKey;
+        setAddress(ownerToken.toString())
         const result = isValidSolanaAddress(ownerToken);
         const nfts = await getParsedNftAccountsByOwner({
           publicAddress: ownerToken,
           connection: connect,
           serialization: true,
         });
-        console.log(nfts)
+        // console.log(nfts)
+        setMyopaNft(nfts);
         return nfts;
       }
     }
@@ -66,6 +72,10 @@ const ConnectToPhantom = () => {
   const disconnectHandler = () => {
     phantom?.disconnect();
   };
+
+  const handleChangeCharacter = () => {
+    setOpenModal(true)
+  }
 
   let phantomButton;
 
@@ -109,7 +119,14 @@ const ConnectToPhantom = () => {
         )}
       </div>
       <Controller/>
+      <Modal myopaNFT={myopaNFT} status={openModal} setOpenModal={setOpenModal} />
       { phantomButton }
+      <button
+          onClick={handleChangeCharacter}
+          className="bg-purple-500 py-2 px-4 border border-transparent rounded-md text-sm font-medium text-white whitespace-nowrap hover:bg-opacity-75 mt-8"
+        >
+          Change character
+        </button>
     </div>
   );
 };
